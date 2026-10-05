@@ -60,7 +60,7 @@ input{font:500 18px Quicksand,system-ui,sans-serif;color:var(--ink);text-align:c
 .jar{width:160px;height:180px;cursor:pointer;background:none;border:0;padding:0;z-index:2}
 .pol{position:absolute;left:50%;top:0;width:210px;background:#fff;padding:10px 10px 34px;box-shadow:0 10px 24px #0003;transform:translate(-50%,170px) scale(.4);opacity:0;transition:transform .9s cubic-bezier(.2,1.25,.4,1),opacity .4s;color:#6b3f4d;z-index:1}
 .pol.out{opacity:1;transform:translate(-50%,-10px) scale(1) rotate(var(--r,-4deg))}
-.pol svg{display:block;width:100%;height:150px}.pol p{margin:6px 0 0;font-size:23px}
+.pol img{display:block;width:100%;height:150px;object-fit:cover}.pol p{margin:6px 0 0;font-size:23px}
 /* stars */
 .sky{position:relative;width:290px;height:260px}
 .st{position:absolute;width:34px;height:34px;margin:-17px;border:0;background:none;font-size:26px;color:var(--rose2);cursor:pointer;opacity:.6;transition:.5s}
@@ -113,7 +113,7 @@ input{font:500 18px Quicksand,system-ui,sans-serif;color:var(--ink);text-align:c
   <h2>Memory Jar</h2>
   <p class="sub">Tap the jar to pull out a memory</p>
   <div class="stage">
-    <div class="pol" id="pol"><svg id="pimg" viewBox="0 0 200 150"></svg><p id="pcap"></p></div>
+    <div class="pol" id="pol"><img id="pimg" src="" alt="Memory photo"><p id="pcap"></p></div>
     <button class="jar" id="jar" aria-label="Pull out a memory"><svg viewBox="0 0 170 190"><path d="M40 22h90v14c18 8 28 24 28 48v78c0 14-10 24-24 24H36c-14 0-24-10-24-24V84c0-24 10-40 28-48z" fill="#fff" fill-opacity=".6" stroke="#e5c3cc" stroke-width="3"/><rect x="36" y="10" width="98" height="18" rx="6" fill="#f0829c"/><path d="M85 28c-14-10-30 0-18 12l18 4 18-4c12-12-4-22-18-12z" fill="#d9607e"/><g fill="#fff" stroke="#ecd0d7"><rect x="52" y="138" width="36" height="28" transform="rotate(-12 70 152)"/><rect x="88" y="128" width="32" height="32" transform="rotate(14 104 144)"/></g><text x="86" y="125" text-anchor="middle" font-size="26">💌</text></svg></button>
   </div>
   <button class="btn" id="b4" style="display:none">Keep going</button>
@@ -181,9 +181,9 @@ $('#hb').onclick=()=>{if(ri>=6)return;const w=$('#why');w.textContent=R[ri++];$(
 $('#b3').onclick=()=>go(4);
 function i3(){ri=0;$('#why').textContent='Tap the heart…';$('#cnt').textContent='0 / 6';$('#b3').style.display='none'}
 /* 4 jar */
-const M=[['Our first date','<rect width="200" height="150" fill="#fbd5de"/><circle cx="150" cy="38" r="22" fill="#fbe9a8"/><path d="M0 115c40-30 80-10 120-20s60-10 80 0v55H0z" fill="#e0607e" opacity=".45"/><text x="100" y="92" text-anchor="middle" font-size="44">☕</text>'],['Hidding things from parents','<rect width="200" height="150" fill="#2f3556"/><g fill="#fff"><circle cx="30" cy="30" r="2"/><circle cx="92" cy="18" r="2"/><circle cx="165" cy="44" r="2"/></g><path d="M0 125c50-20 100-20 200 0v25H0z" fill="#1a1e36"/><text x="100" y="105" text-anchor="middle" font-size="46">💃</text>'],['Our favourite Day','<rect width="200" height="150" fill="#f8b79c"/><circle cx="100" cy="98" r="40" fill="#fae6a4"/><rect y="100" width="200" height="50" fill="#a0668a"/><text x="100" y="134" text-anchor="middle" font-size="30" fill="#fff">♥</text>']];
+const M=[['Our first date','memory1.jpg'],['Dancing in the dark','memory2.jpg'],['Our favourite sunset','memory3.jpg']];
 let mi=0;
-function pull(){const p=$('#pol');p.classList.remove('out');setTimeout(()=>{const m=M[mi%3];$('#pimg').innerHTML=m[1];$('#pcap').textContent=m[0];p.style.setProperty('--r',(mi%2?5:-4)+'deg');p.classList.add('out');if(++mi>=3)$('#b4').style.display='block'},250)}
+function pull(){const p=$('#pol');p.classList.remove('out');setTimeout(()=>{const m=M[mi%3];$('#pimg').src=m[1];$('#pcap').textContent=m[0];p.style.setProperty('--r',(mi%2?5:-4)+'deg');p.classList.add('out');if(++mi>=3)$('#b4').style.display='block'},250)}
 $('#jar').onclick=pull;$('#b4').onclick=()=>go(5);
 function i4(){mi=0;$('#pol').classList.remove('out');$('#b4').style.display='none'}
 /* 5 stars: heart constellation */
